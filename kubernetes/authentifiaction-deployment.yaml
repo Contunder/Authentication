@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentification
+  labels:
+    app: authentification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentification
+  template:
+    metadata:
+      labels:
+        app: authentification
+    spec:
+      containers:
+        - name: authentification
+          image: valden01/authentification:latest
+          ports:
+            - name: http
+              containerPort: 8080
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentification
+  labels:
+    app: authentification
+spec:
+  type: LoadBalancer
+  selector:
+    app: authentification
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8080
+      targetPort: 8080
+      nodePort: 30000
