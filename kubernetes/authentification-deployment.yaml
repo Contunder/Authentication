@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authentification
+  name: authentication
   labels:
-    app: authentification
+    app: authentication
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: authentification
+      app: authentication
   template:
     metadata:
       labels:
-        app: authentification
+        app: authentication
     spec:
       containers:
-        - name: authentification
-          image: valden01/authentification:latest
+        - name: authentication
+          image: valden01/authentication:latest
           ports:
             - name: http
               containerPort: 8080
@@ -26,13 +26,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: authentification
+  name: authentication
   labels:
-    app: authentification
+    app: authentication
 spec:
   type: LoadBalancer
   selector:
-    app: authentification
+    app: authentication
   ports:
     - protocol: TCP
       name: http
@@ -43,10 +43,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: authentification-service
+  name: authentication-service
 spec:
   selector:
-    app: authentification
+    app: authentication
   ports:
     - protocol: TCP
       name: http
