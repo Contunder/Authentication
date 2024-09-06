@@ -1,7 +1,11 @@
-package com.helloworlds.authentication.infrastructure.security;
+package com.helloworlds.authentication;
 
 import com.helloworlds.authentication.application.exception.AuthenticationAPIException;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +17,7 @@ import java.security.Key;
 import java.util.Date;
 
 @Component
-public class JwtTokenProvider {
+public class TokenProvider {
 
     @Value("${app.jwt-secret}")
     private String jwtSecret;

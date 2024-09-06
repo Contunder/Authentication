@@ -9,7 +9,7 @@ import com.helloworlds.authentication.infrastructure.dao.UserDAO;
 import com.helloworlds.authentication.infrastructure.entity.Role;
 import com.helloworlds.authentication.infrastructure.exception.SqlException;
 import com.helloworlds.authentication.infrastructure.mapper.AuthenticationMapper;
-import com.helloworlds.authentication.infrastructure.security.JwtTokenProvider;
+import com.helloworlds.authentication.TokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,15 +20,15 @@ import org.springframework.stereotype.Component;
 public class UserAdapter implements UserPort {
 
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final TokenProvider tokenProvider;
     private final AuthenticationDAO authenticationDAO;
     private final RoleDAO roleDAO;
     private final UserDAO userDAO;
     private final AuthenticationMapper authenticationMapper;
 
-    public UserAdapter(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, AuthenticationDAO authenticationDAO, RoleDAO roleDAO, UserDAO userDAO, AuthenticationMapper authenticationMapper) {
+    public UserAdapter(AuthenticationManager authenticationManager, TokenProvider tokenProvider, AuthenticationDAO authenticationDAO, RoleDAO roleDAO, UserDAO userDAO, AuthenticationMapper authenticationMapper) {
         this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
+        this.tokenProvider = tokenProvider;
         this.authenticationDAO = authenticationDAO;
         this.roleDAO = roleDAO;
         this.userDAO = userDAO;
@@ -44,7 +44,7 @@ public class UserAdapter implements UserPort {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        user.setToken(jwtTokenProvider.generateToken(authentication));
+        user.setToken(tokenProvider.generateToken(authentication));
 
         return user;
     }
