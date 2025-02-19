@@ -28,7 +28,6 @@ public class UserDAO {
                 )
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
-                .header("x-api-version", version)
                 .POST(HttpRequest.BodyPublishers.ofString(user.toJson()))
                 .build();
 

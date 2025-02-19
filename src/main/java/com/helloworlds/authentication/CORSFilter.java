@@ -12,9 +12,8 @@ import java.io.IOException;
 @Component
 public class CORSFilter implements Filter {
 
-    private final Logger log = LoggerFactory.getLogger(CORSFilter.class);
-
     public CORSFilter() {
+        Logger log = LoggerFactory.getLogger(CORSFilter.class);
         log.info("SimpleCORSFilter init");
     }
 
@@ -35,10 +34,6 @@ public class CORSFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-    }
-
-    @Override
-    public void destroy() {
     }
 
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/authentication")
+@RequestMapping("/api/authentication")
 public class AuthenticationController {
 
     public static final String USER_CREATED = "User Successfully Created";

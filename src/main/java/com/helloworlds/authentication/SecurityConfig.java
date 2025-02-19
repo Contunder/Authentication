@@ -37,9 +37,8 @@ public class SecurityConfig {
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/user/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/hotel/**").permitAll()
+                        authorize.requestMatchers(HttpMethod.POST,"/api/authentication/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/authentication/**").permitAll()
                                 .anyRequest().permitAll()
 
                 );
@@ -48,7 +47,7 @@ public class SecurityConfig {
     }
 
     @Configuration
-    public class WebConfiguration implements WebMvcConfigurer {
+    public static class WebConfiguration implements WebMvcConfigurer {
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/*").allowedMethods("");
         }
